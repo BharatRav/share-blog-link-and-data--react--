@@ -3,6 +3,7 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
+  WhatsappShareButton,
 } from "react-share";
 
 import {
@@ -24,8 +25,6 @@ const Card = ({ post }) => {
     thumbnail,
     title,
   } = post;
-  //   console.log(post);
-  //   console.log(currImageIndex);
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       {images && <img className="w-full" src={images[0]} alt={category} />}
@@ -60,11 +59,7 @@ const Card = ({ post }) => {
           </LinkedinShareButton>
         </span>
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          <WhatsappShareButton
-            url={images?.[0]}
-            title={title}
-            separator={description}
-          >
+          <WhatsappShareButton url={images?.[0]}>
             <WhatsappIcon size={32} round={true} />
           </WhatsappShareButton>
         </span>

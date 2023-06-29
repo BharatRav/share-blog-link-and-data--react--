@@ -1,35 +1,25 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import AllPosts from "./components/AllPosts";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import Post from "./components/Post";
+import NoPage from "./components/NoPage";
+import Layout from "./components/Layout";
 
 function App() {
-  const [posts, setPosts] = useState(["1"]);
-  useEffect(() => {
-    // fetch('https://jsonplaceholder.typicode.com/posts')
-    //   .then(response => response.json())
-    //   .then(json => {console.log(json)
-    //     setPosts(json)
-    //   })
-    fetch("https://dummyjson.com/products")
-      .then((response) => response.json())
-      .then((json) => {
-        // console.log(json.products);
-        setPosts(json.products);
-      });
-  }, []);
-  // console.log(posts)
-
   return (
     <>
-      <h1 className="text-3xl font-bold text-red-600 underline text-center">
-        This Project Mainly Aims following Task
-      </h1>
-      <p className="text-center">
-        TASK DETAILS :-Create a share option on react for any blog or any page.
-        Where it copies url image and meta tile name description also it works
-        well with OG graph.
-      </p>
-      <AllPosts posts={posts} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/post" element={<Post />} />
+            <Route path="/404" element={<NoPage />} />
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      ;
     </>
   );
 }
